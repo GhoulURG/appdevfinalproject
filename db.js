@@ -1,15 +1,17 @@
 const { Pool } = require("pg");
 
-const pool = new Pool({
-    user: "postgres",
+const mysql = require("mysql2/promise");
+
+const pool = mysql.createPool({
     host: "localhost",
-    database: "pokemon_api",
+    user: "root",
     password: "yourpassword",
-    port: 5432
+    database: "pokemon_api",
+    waitForConnections: true,
+    connectionLimit: 10
 });
 
-module.exports = {
-    query: (text, params) => pool.query(text, params)
+module.exports = pool;
 
 db.query("SELECT NOW()")
   .then(res => console.log(res.rows))
