@@ -1,5 +1,3 @@
-const { Pool } = require("pg");
-
 const mysql = require("mysql2/promise");
 
 const pool = mysql.createPool({
@@ -12,8 +10,3 @@ const pool = mysql.createPool({
 });
 
 module.exports = pool;
-
-db.query("SELECT NOW()")
-  .then(res => console.log(res.rows))
-  .catch(err => console.error(err));
-};
