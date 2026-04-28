@@ -1,6 +1,8 @@
 const express = require("express");
 const session = require("express-session");
 
+const db = require("./db"); // 👈 ADD THIS
+
 const app = express();
 
 app.use(express.json());
@@ -11,10 +13,12 @@ app.use(session({
     saveUninitialized: false
 }));
 
-app.get("/", (req, res) => {
-    res.send("API is running");
-});
+// 🔥 DATABASE TEST (ADD HERE)
+db.query("SELECT 1")
+  .then(() => console.log("✔ DATABASE CONNECTED"))
+  .catch(err => console.log("❌ DB ERROR:", err));
 
+// ROUTES (below this)
 app.use("/auth", require("./routes/authRoutes"));
 app.use("/teams", require("./routes/teamRoutes"));
 
